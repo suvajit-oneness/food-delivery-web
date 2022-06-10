@@ -8,7 +8,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                         <li class="breadcrumb-item active">Edit Admin Users</li>
                     </ol>
                 </div>
@@ -43,6 +43,18 @@
                 @error('type')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
+                <div class="col-9">
+                    <h4 class="my-2">Select Roles for this admin</h4>
+                    <div class="d-flex">
+                        @foreach ($roles as $r)
+                            <div class="mx-3">
+                                <label for="role-{{ $r->id }}">{{ $r->name }}</label>
+                                <input type="checkbox" name="roles[]" value="{{ $r->id }}"
+                                    id="role-{{ $r->id }}" {{ in_array($r->id, $adroles) ? 'checked' : '' }}>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
                 <button class="btn btn-info mx-2 my-3" type="submit">Edit Admin</button>
             </form>
         </div>

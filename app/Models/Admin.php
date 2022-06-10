@@ -11,4 +11,9 @@ class Admin extends Authenticatable
     use HasFactory;
 
     protected $guard = 'admin';
+
+    // public function roles()
+    // {
+    //     return $this->belongsTo(Role_user::class, 'admin_id', 'id');
+    // }
 }

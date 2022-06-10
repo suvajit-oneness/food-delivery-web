@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\RoleManagementController;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Logout;
@@ -26,15 +27,22 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::get('login', [AuthController::class, 'index'])->name('admin.login');
 Route::post('login', [AuthController::class, 'login'])->name('admin.login.doLogin');
-Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
+
 Route::group(
     ['middleware' => ['auth:admin']],
     function () {
+        Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
 
         Route::get('dashboard', [DashboardController::class, 'index'], function () {
             dd('hello');
         })->name('admin.dashboard');
 
+        Route::prefix('dashboard/profile')->name('profile.')->group(function () {
+            Route::get('view', [ProfileController::class, 'view'])->name('view_profile');
+            Route::post('update', [ProfileController::class, 'update'])->name('update_profile');
+            Route::get('change-password', [ProfileController::class, 'change_pasword'])->name('change-password');
+            Route::post('change-password', [ProfileController::class, 'update_password'])->name('update-password');
+        });
 
         // Admin Management
         Route::prefix('dashboard/admin')->name('admin.')->group(function () {

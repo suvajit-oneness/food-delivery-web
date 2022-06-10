@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Interfaces\RolesRepositoryInterface;
 use App\Models\Admin;
 use App\Models\Order;
-use App\Models\Roles;
+use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -13,25 +13,25 @@ class RolesRepository implements RolesRepositoryInterface
 {
     public function getAllRoles()
     {
-        return Roles::paginate(10);
+        return Role::paginate(10);
     }
     public function getRolesById($roleId)
     {
-        return Roles::where('id', $roleId)->get();
+        return Role::where('id', $roleId)->get();
     }
     public function deleteRoles($roleId)
     {
-        return Roles::destroy($roleId);
+        return Role::destroy($roleId);
     }
     public function createRoles(array $roledetails)
     {
-        $role = new Roles();
+        $role = new Role();
         $role->name = $roledetails['name'];
         return $role->save();
     }
     public function updateRoles($roleId, array $roledetails)
     {
-        return Roles::where('id', $roleId)->update([
+        return Role::where('id', $roleId)->update([
             'name' => $roledetails['name'],
         ]);
     }
