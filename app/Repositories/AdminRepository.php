@@ -30,7 +30,8 @@ class AdminRepository implements AdminRepositoryInterface
         $admin->password = Hash::make($admindetails['password']);
         $admin->type = $admindetails['type'];
 
-        return $admin->save();
+        $admin->save();
+        return $admin->id;
     }
     public function updateAdmins($adminId, array $admindetails)
     {

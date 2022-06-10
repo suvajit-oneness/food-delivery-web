@@ -52,11 +52,11 @@ class AdminController extends Controller
         $collection = $request->only('name', 'email', 'password', 'type');
 
         $saveadmin = $this->AdminRepositoryInterface->createAdmins($collection);
-
-        foreach ($request->roles as $roles) {
-            $saverole = Role_user::insert(['admin_id' => Auth::guard('admin')->user()->id, 'role_id' => $roles]);
+        if (isset($request->roles) && count($request->roles) > 0) {
+            foreach ($request->roles as $roles) {
+                $saverole = Role_user::insert(['admin_id' => $saveadmin, 'role_id' => $roles]);
+            }
         }
-
         if ($saveadmin) {
             return redirect(route('admin.viewadmins'))->with('success', 'New Admin Profile Added!');
         } else {
@@ -66,7 +66,18 @@ class AdminController extends Controller
     public function edit($id)
     {
         $details = $this->AdminRepositoryInterface->getAdminsById($id);
-        return view('admin.admin_users.edit', compact('details'));
+
+        $roles = $this->RolesRepositoryInterface->getAllRoles();
+        // dd($id);
+        $adroles = [];
+        $roles_for_admin = Role_user::where('admin_id', $id)->get();
+        // dd($roles_for_admin);
+
+        foreach ($roles_for_admin as $rad) {
+            array_push($adroles, $rad->role_id);
+        }
+
+        return view('admin.admin_users.edit', compact('details', 'roles', 'adroles'));
     }
     public function update(Request $request)
     {
@@ -79,6 +90,16 @@ class AdminController extends Controller
         $collection = $request->only('name', 'email', 'type');
 
         $editadmin = $this->AdminRepositoryInterface->updateAdmins($request->id, $collection);
+
+        if (!isset($request->roles)) {
+            Role_user::where('admin_id', $request->id)->delete();
+        } else {
+            Role_user::where('admin_id', $request->id)->delete();
+            foreach ($request->roles as $r) {
+                Role_user::insert(['admin_id' => $request->id, 'role_id' => $r]);
+            }
+        }
+
         if ($editadmin)
             return  redirect(route('admin.viewadmins'))->with('success', 'Profile Edited successfully!');
         else

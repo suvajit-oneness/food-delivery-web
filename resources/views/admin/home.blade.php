@@ -113,6 +113,34 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li class="nav-item {{ request()->is('admin/dashboard/profile*') ? 'menu-open' : '' }}">
+                                <a href="#"
+                                    class="nav-link {{ request()->is('admin/dashboard/profile*') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-user-alt"></i>
+                                    <p>
+                                        My Profile
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('profile.view_profile') }}"
+                                            class="nav-link {{ request()->is('admin/dashboard/profile/view*') ? 'active' : '' }}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>View Profile</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('profile.change-password') }}"
+                                            class="nav-link {{ request()->is('admin/dashboard/profile/change-password*') ? 'active' : '' }}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Change Password</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
