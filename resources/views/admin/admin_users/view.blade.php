@@ -8,7 +8,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                         <li class="breadcrumb-item active">View all admins</li>
                     </ol>
                 </div>
@@ -37,6 +37,18 @@
                         </thead>
                         <tbody>
                             @forelse ($users as $userKey => $user)
+                                @php
+                                    $rad = App\Models\Role_user::where('admin_id', $user->id)
+                                        ->join('roles', 'roles.id', '=', 'role_users.role_id')
+                                        ->get('name')
+                                        ->toArray();
+                                    
+                                    $arr = [];
+                                    foreach ($rad as $rad) {
+                                        array_push($arr, $rad['name']);
+                                    }
+                                    $rads = implode(',', $arr);
+                                @endphp
                                 <tr>
                                     <td class="text-bold">{{ $userKey + 1 }}</a></td>
                                     <td>{{ $user->avatar }}</td>
@@ -47,7 +59,7 @@
                                         </span>
                                     </td>
                                     <td>{{ $user->type == 1 ? 'Super Admin' : 'Admin' }}</td>
-                                    <td>{{ '--' }}</td>
+                                    <td>{{ $rads }}</td>
                                     <td>
                                         <a href="{{ route('admin.viewadmindetails', [$user->id]) }}"><i
                                                 class="fa fa-eye btn btn-sm btn-primary" aria-hidden="true"></i></a>
