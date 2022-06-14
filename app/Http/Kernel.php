@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\checkAdmin;
+use App\Http\Middleware\CheckMerchant;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -41,8 +42,15 @@ class Kernel extends HttpKernel
         ],
 
         'admin' => [
-            checkAdmin::class,
             // Illuminate\Validation\Validator::class,
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            \App\Http\Middleware\VerifyCsrfToken::class,
+        ],
+
+        'merchant' => [
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,

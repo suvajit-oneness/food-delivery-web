@@ -43,7 +43,8 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Change Profile Picture: </label>
-                            <input type="file" class="form-control bg-transparent" name="avatar">
+                            <input type="file" class="form-control bg-transparent" name="avatar"
+                                accept="image/png, image/jpeg" />
                         </div>
                         <button class="btn btn-primary btn-sm">Update</button>
                     </form>
