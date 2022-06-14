@@ -11,14 +11,16 @@ class Role_user extends Model
 {
     use HasFactory;
 
+    public $timestamp = true;
+
     /**
-     * Get the user that owns the Role_user
+     * Get the roles that owns the Role_user
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    
-    public function user(): BelongsTo
+    public function roles(): BelongsTo
     {
         return $this->belongsTo(Role::class, 'id', 'role_id');
     }
+
 }

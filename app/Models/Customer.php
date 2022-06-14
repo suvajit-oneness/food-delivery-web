@@ -23,4 +23,14 @@ class Customer extends Model
     {
         return $this->hasMany(CustomerAddress::class);
     }
+
+    /**
+     * Get all of the logged_devices for the Customer
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function logged_devices(): HasMany
+    {
+        return $this->hasMany(CustomerLoggedDevice::class, 'customer_id', 'id');
+    }
 }

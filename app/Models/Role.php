@@ -9,8 +9,5 @@ class Role extends Model
 {
     use HasFactory;
 
-    protected $visible = [
-        'id',
-        'name'
-    ];
+    public $timestamp = true;
 }

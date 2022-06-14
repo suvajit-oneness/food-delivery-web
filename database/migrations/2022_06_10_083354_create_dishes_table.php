@@ -15,10 +15,12 @@ class CreateDishesTable extends Migration
     {
         Schema::create('dishes', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(\App\Models\Restaurant::class);
+            $table->string('added_by', 100)->nullable()->default('admin')->comment('admin or merchant');
             $table->string('name', 100)->nullable()->default('');
             $table->longText('description')->nullable()->default('');
             $table->string('image', 200)->nullable()->default('');
-            $table->tinyInteger('is_active')->default(0);
+            $table->tinyInteger('is_active')->default(1);
             $table->timestamps();
         });
     }

@@ -78,18 +78,6 @@
                                 </tr>
                             @endforelse
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Id</th>
-                                <th>Avatar</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Admin type</th>
-                                <th>Roles</th>
-                                <th>Action</th>
-                                <th>Action</th>
-                            </tr>
-                        </tfoot>
                     </table>
                     {{ $users->appends($_GET)->links() }}
                 </div>
