@@ -20,7 +20,7 @@ class CreateDishesTable extends Migration
             $table->string('name', 100)->nullable()->default('');
             $table->longText('description')->nullable()->default('');
             $table->string('image', 200)->nullable()->default('');
-            $table->tinyInteger('is_active')->default(0);
+            $table->tinyInteger('is_active')->default(1);
             $table->timestamps();
         });
     }
