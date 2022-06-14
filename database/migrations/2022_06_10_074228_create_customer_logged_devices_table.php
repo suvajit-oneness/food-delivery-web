@@ -15,6 +15,7 @@ class CreateCustomerLoggedDevicesTable extends Migration
     {
         Schema::create('customer_logged_devices', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(App\Models\Customer::class);
             $table->string('device_type', 50)->default('android');
             $table->string('firebase_token', 250)->default('');
             $table->tinyInteger('is_expired')->default(0);

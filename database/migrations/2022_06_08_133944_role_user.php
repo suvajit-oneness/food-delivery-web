@@ -28,6 +28,6 @@ class RoleUser extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('role_users');
     }
 }

@@ -11,6 +11,7 @@ class Admin extends Authenticatable
     use HasFactory;
 
     protected $guard = 'admin';
+    public $timestamp = true;
 
     // public function roles()
     // {
