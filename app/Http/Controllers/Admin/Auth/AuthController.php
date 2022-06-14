@@ -29,7 +29,7 @@ class AuthController extends Controller
             return redirect()->back()->with('WrongCred', 'Wrong Credentials!');
     }
 
-    public function logout()
+    public function adminLogout()
     {
         Auth::guard('admin')->logout();
         return redirect(route('admin.login'));

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+use App\Models\Customer;
+use App\Models\Role_user;
+use RoleUser;
 use Illuminate\Database\Eloquent\Builder;
 
 class TestController extends Controller

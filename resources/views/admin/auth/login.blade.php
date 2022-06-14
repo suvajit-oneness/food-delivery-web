@@ -1,8 +1,3 @@
-@if (Auth::guard('admin')->check())
-    <script>window.location = "{{ route('admin.dashboard') }}";</script>
-    <?php exit; ?>
-@endif
-
 @extends('admin.layouts.app')
 
 @section('content')
@@ -15,6 +10,9 @@
                     <div class="card-body">
                         @if (session('WrongCred'))
                             <div class="alert alert-danger">{{ session('WrongCred') }}</div>
+                        @endif
+                        @if (session('success'))
+                            <div class="alert alert-success">{{ session('success') }}</div>
                         @endif
                         <form method="POST" action="{{ route('admin.login.doLogin') }}">
                             @csrf

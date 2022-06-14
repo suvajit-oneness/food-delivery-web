@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\TestController;
+use App\Http\Middleware\checkAdminLogin;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,15 +17,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware(checkAdminLogin::class)->group(function () {
+    Route::get('/', function () {
+        return redirect('admin/login');
+    });
 });
 
 // Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['prefix' => 'test'], function(){
+Route::group(['prefix' => 'test'], function () {
     // die('Hi');
     Route::get('/get-customer', [TestController::class, 'getCustomer']);
     // Route::any('/get-customer', 'TestController@getCustomer')->name('test.get-customer');

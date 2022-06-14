@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\RoleManagementController;
+use App\Http\Middleware\checkAdmin;
+use App\Http\Middleware\checkAdminLogin;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Logout;
 use Illuminate\Routing\RouteRegistrar;
@@ -25,13 +27,15 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/test', function () {
 //     return "Hello";
 // });
-Route::get('login', [AuthController::class, 'index'])->name('admin.login');
-Route::post('login', [AuthController::class, 'login'])->name('admin.login.doLogin');
+Route::middleware([checkAdminLogin::class])->group(function () {
+    Route::get('login', [AuthController::class, 'index'])->name('admin.login');
+    Route::post('login', [AuthController::class, 'login'])->name('admin.login.doLogin');
+});
 
-Route::group(
-    ['middleware' => ['auth:admin']],
+Route::middleware([checkAdmin::class])->group(
     function () {
-        Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
+
+        Route::post('admin/logout', [AuthController::class, 'adminLogout'])->name('admin.logout');
 
         Route::get('dashboard', [DashboardController::class, 'index'], function () {
             dd('hello');

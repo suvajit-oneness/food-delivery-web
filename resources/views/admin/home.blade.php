@@ -75,44 +75,47 @@
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                             data-accordion="false">
-                            <li class="nav-item {{ request()->is('admin/dashboard/admin*') ? 'menu-open' : '' }}">
-                                <a href="#"
-                                    class="nav-link {{ request()->is('admin/dashboard/admin*') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-user-alt"></i>
-                                    <p>
-                                        Admin Management
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="{{ route('admin.viewadmins') }}"
-                                            class="nav-link {{ request()->is('admin/dashboard/admin*') ? 'active' : '' }}">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Admin users</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item {{ request()->is('admin/dashboard/roles*') ? 'menu-open' : '' }}">
-                                <a href="#"
-                                    class="nav-link {{ request()->is('admin/dashboard/roles*') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-user-alt"></i>
-                                    <p>
-                                        Role Management
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="{{ route('roles.viewroles') }}"
-                                            class="nav-link {{ request()->is('admin/dashboard/roles*') ? 'active' : '' }}">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Admin Roles</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
+                            @if (Auth::guard('admin')->user()->type == 1)
+                                <li class="nav-item {{ request()->is('admin/dashboard/admin*') ? 'menu-open' : '' }}">
+                                    <a href="#"
+                                        class="nav-link {{ request()->is('admin/dashboard/admin*') ? 'active' : '' }}">
+                                        <i class="nav-icon fas fa-user-alt"></i>
+                                        <p>
+                                            Admin Management
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="{{ route('admin.viewadmins') }}"
+                                                class="nav-link {{ request()->is('admin/dashboard/admin*') ? 'active' : '' }}">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Admin users</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item {{ request()->is('admin/dashboard/roles*') ? 'menu-open' : '' }}">
+                                    <a href="#"
+                                        class="nav-link {{ request()->is('admin/dashboard/roles*') ? 'active' : '' }}">
+                                        <i class="nav-icon fas fa-user-alt"></i>
+                                        <p>
+                                            Role Management
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="{{ route('roles.viewroles') }}"
+                                                class="nav-link {{ request()->is('admin/dashboard/roles*') ? 'active' : '' }}">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Admin Roles</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
                             <li class="nav-item {{ request()->is('admin/dashboard/profile*') ? 'menu-open' : '' }}">
                                 <a href="#"
                                     class="nav-link {{ request()->is('admin/dashboard/profile*') ? 'active' : '' }}">
@@ -151,12 +154,12 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.logout') }}"
-                                    onclick="event.preventDefault();                                                                                                                                     document.getElementById('logout-form').submit();">
+                                <a class="nav-link" href="#"
+                                    onclick="document.getElementById('logout-form').submit();                                                                                                                                     document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST"
                                     style="display: none;">
                                     @csrf
                                 </form>
