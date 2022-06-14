@@ -38,9 +38,7 @@
                 @enderror
                 <div class="col-9">
                     <label for="type" class="form-label">Admin Type</label>
-                    <select class="form-control" name="type" id="type">
-                        <option value="">Select Admin type</option>
-                        <option value="1">Super Admin</option>
+                    <select readonly class="form-control" name="type" id="type">
                         <option value="2">Admin</option>
                     </select>
                 </div>

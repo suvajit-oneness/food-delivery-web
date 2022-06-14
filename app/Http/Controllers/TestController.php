@@ -11,11 +11,12 @@ class TestController extends Controller
     //
     public function getCustomer(Request $request)
     {
-        $data = Customer::find(1);
-        // echo '<pre>'; print_r($data);
-        $faker = \Faker\Factory::create();
-        $name = $faker->name();
-        echo $name;
+        // $data = Customer::find(1);
+        // // echo '<pre>'; print_r($data);
+        // $faker = \Faker\Factory::create();
+        // $name = $faker->name();
+        // echo $name;
+
         
 
     }

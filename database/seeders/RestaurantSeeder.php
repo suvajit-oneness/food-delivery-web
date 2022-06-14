@@ -15,10 +15,21 @@ class RestaurantSeeder extends Seeder
      */
     public function run()
     {
-        for($i = 1; $i<= 20; $i++){
-            $faker = \Faker\Factory::create();
-            $name = $faker->Restaurant.name();
-
+        $arrNames = [
+            "Cool Beans Barista",
+            "Here & There Cafe",
+            "Espresso Lane Coffee Bar",
+            "Needle & Thread Cafe",
+            "Rainforest Planet Diner",
+            "Secret Planet Cafe",
+            "Fatty Panini Luncheonette",
+            "Black Delight Diner",
+            "Sweet Planet Coffee Shop",
+            "Havana Java Cafe"
+        ];
+        for($i = 0; $i< count($arrNames); $i++){
+            // $faker = \Faker\Factory::create();
+            $name = $arrNames[$i];
             DB::table('restaurants')->insert([
                 "name" => $name,
                 'description' => $name,
